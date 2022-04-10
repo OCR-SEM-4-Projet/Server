@@ -455,6 +455,7 @@ section {
 }
 #footer .footer-top .footer-contact {
   margin-bottom: 30px;
+  margin-left: 150px;
 }
 #footer .footer-top .footer-contact h3 {
   font-size: 28px;
@@ -480,6 +481,7 @@ section {
 }
 #footer .footer-top .footer-links {
   margin-bottom: 30px;
+  margin-left: 120px;
 }
 #footer .footer-top .footer-links ul {
   list-style: none;
@@ -512,6 +514,7 @@ section {
 }
 #footer .footer-newsletter {
   font-size: 15px;
+  margin-left: 40px;
 }
 #footer .footer-newsletter h4 {
   font-size: 16px;
