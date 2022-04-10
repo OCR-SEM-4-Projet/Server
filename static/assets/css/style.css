@@ -344,6 +344,7 @@ section {
 .section-title {
   text-align: center;
   padding-bottom: 30px;
+  margin-top: -70px;
 }
 .section-title h2 {
   font-size: 32px;
@@ -415,6 +416,10 @@ section {
   background: #7272f5;
 }
 
+.check-result-section{
+  margin-top: 5px;
+}
+
 /*--------------------------------------------------------------
 # Contact
 --------------------------------------------------------------*/
@@ -430,6 +435,10 @@ section {
 .contact button[type="submit"]:hover {
   background: #7272f5;
 }
+
+.report-section{
+  margin-top: 5px;
+}
 /*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
@@ -442,6 +451,7 @@ section {
 #footer .footer-top {
   padding: 60px 0 30px 0;
   background: #fff;
+  margin-top: -50px;
 }
 #footer .footer-top .footer-contact {
   margin-bottom: 30px;
