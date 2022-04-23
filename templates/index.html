@@ -111,18 +111,25 @@
 
         <div class="section-title">
           <h2>Admin Log In</h2>
+          <!-- showing flash message -->
+          {% with messages=get_flashed_messages() %} {% if messages %} {% for message in
+          messages %}
+          <script>alert("{{message}}")</script>
+          {% endfor %} {% endif %} {% endwith %}
+          <form action="/login" method="post">
 
-        <div class="form-floating mb-3">
-          <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-          <label for="floatingInput">User ID</label>
-        </div>
-        <div class="form-floating mb-3">
-          <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-          <label for="floatingPassword">Password</label>
-        </div>
+            <div class="form-floating mb-3">
+              <input type="text" name="username" class="form-control" id="floatingInput" placeholder="name@example.com">
+              <label for="floatingInput">User ID</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+              <label for="floatingPassword">Password</label>
+            </div>
 
-        <div class="text-center"><button type="submit">Log In</button></div>
-      </div>
+            <div class="text-center"><button type="submit">Log In</button></div>
+          </form>
+        </div>
     </section><!-- End Services Section -->
 
 

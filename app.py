@@ -1,10 +1,13 @@
 from flask import Flask
-from flask import render_template
+from flask import render_template, request, flash
 from flask_sqlalchemy import SQLAlchemy
 import bcrypt
-
+from dotenv import load_dotenv
+import os
 app = Flask(__name__)
+load_dotenv('.env')
 
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres:test1234@localhost:5433/OCR"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
@@ -42,9 +45,19 @@ def index():
     return render_template('index.html')
 
 
-@app.route("/login")
+@app.route("/login", methods=["GET", "POST"])
 def Log_in():
-    return render_template("login.html")
+    if request.method == "GET":
+        return render_template("index.html")
+    elif request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+        print(username, password)
+        if username == "admin" and password == "admin":
+            return render_template("dashboard.html")
+        else:
+            flash("Invalid username or password")
+            return render_template("index.html")
 
 
 if __name__ == '__main__':
