@@ -1,7 +1,6 @@
 from flask import Flask
 from flask import render_template, request, flash
 from flask_sqlalchemy import SQLAlchemy
-import bcrypt
 from dotenv import load_dotenv
 import os
 app = Flask(__name__)
