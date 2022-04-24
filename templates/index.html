@@ -61,7 +61,8 @@
           <ul>
             <li><i class="ri-check-line"></i> Here you can view your result</li>
             <li><i class="ri-check-line"></i> We provide a user friendly interface</li>
-            <li><i class="ri-check-line"></i> Don't worry your data won't be shared with anyone. It is safe and secured</li>
+            <li><i class="ri-check-line"></i> Don't worry your data won't be shared with anyone. It is safe and secured
+            </li>
           </ul>
           <div class="mt-3">
             <a href="#about" class="btn-get-started scrollto">Check Result</a>
@@ -81,25 +82,23 @@
     <!-- ======= About Section ======= -->
     <section id="about" class="about">
       <div class="container">
+        <form action="/result" method="post">
 
-        <div class="section-title check-result-section">
-          <h2>Check Your Result</h2>
-        </div>
-        <div class="form-floating mb-3">
-          <input type="number" class="form-control" id="floatingInput" placeholder="name@example.com">
-          <label for="floatingInput">Seat Number</label>
-        </div>
-        <div class="form-floating mb-3">
-          <input type="name" class="form-control" id="floatingInput" placeholder="name@example.com">
-          <label for="floatingInput">Full Name</label>
-        </div>
-        <div class="form-floating mb-3">
-          <input type="name" class="form-control" id="floatingInput" placeholder="name@example.com">
-          <label for="floatingInput">Mother's Name</label>
-        </div>
+          <div class="section-title check-result-section">
+            <h2>Check Your Result</h2>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="number" class="form-control" id="floatingInput" placeholder="name@example.com" name="seat_no">
+            <label for="floatingInput">Seat Number</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="name" class="form-control" id="floatingInput" placeholder="name@example.com" name="full_name">
+            <label for="floatingInput">Full Name</label>
+          </div>
 
 
-        <div class="text-center"><button type="submit">Submit</button></div>
+          <div class="text-center"><button type="submit">Submit</button></div>
+        </form>
       </div>
     </section><!-- End About Section -->
 

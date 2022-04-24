@@ -9,6 +9,9 @@ instance/*
 .webassets-cache
 .env
 
+### SQLTools ###
+*.session.sql
+
 ### Flask.Python Stack ###
 # Byte-compiled / optimized / DLL files
 __pycache__/

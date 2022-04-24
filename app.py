@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask
 from flask import render_template, request, flash
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
@@ -7,7 +7,7 @@ app = Flask(__name__)
 load_dotenv('.env')
 from OCRdataExtract import over_all, q2_q3_marks
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres:test1234@localhost:5433/OCR"
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres:test123@localhost:5433/OCR"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JSON_AS_ASCII'] = False
 db = SQLAlchemy(app)
@@ -83,9 +83,14 @@ def submit():
         for i in range(1,count):
             PRN = request.form['prn'+str(i)]
             Name = request.form['name'+str(i)]
-            Mcq_marks = int(request.form['mcq'+str(i)])
-            q2_marks =  int(request.form['q2'+str(i)])
-            q3_marks = int(request.form['q3'+str(i)])
+            try:
+                Mcq_marks = int(request.form['mcq'+str(i)])
+                q2_marks =  int(request.form['q2'+str(i)])
+                q3_marks = int(request.form['q3'+str(i)])
+            except Exception as e:
+                Mcq_marks = 0
+                q2_marks = 0
+                q3_marks = 0
             print(PRN,Name,Mcq_marks,q2_marks,q3_marks)
             Results = Result(seat_no=PRN, name=Name, Mcq_marks=Mcq_marks,q2_marks=q2_marks,q3_marks=q3_marks,Tot_des_marks=q2_marks+q3_marks,Tot_marks=q2_marks+q3_marks+Mcq_marks)
             db.session.add(Results)
@@ -93,5 +98,18 @@ def submit():
         return "work"
         
     return "o"
+
+@app.route('/result',methods=['GET', 'POST'])
+def result():
+    if request.method == 'POST':
+        seat_no = request.form["seat_no"]
+        full_name = request.form["full_name"]
+        print(seat_no,full_name)
+        data = Result.query.filter_by(seat_no=seat_no,name=full_name).first()
+        print(data)
+        return "p"
+        # return render_template('result.html',data=data)
+    else:
+        return render_template('dashboard.html')
 if __name__ == '__main__':
     app.run(debug=True)
