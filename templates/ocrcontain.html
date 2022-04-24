@@ -45,45 +45,49 @@
         </div>
         <div class="container">
             <form action="/submit" method="POST">
-            <table id="myTable" class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">PRN</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">MCQ Marks</th>
-                        <th scope="col">Q2 Marks</th>
-                        <th scope="col">Q3 Marks</th>
-                        <th scope="col">Action</th>
-                        <!-- <th scope="col">Total Discriptive Marks</th>
+                <table id="myTable" class="table">
+                    <label for="subname" class="fw-bold pe-3">Subject Name : </label>
+                    <input type="text" id="subname" name="subname">
+                    <label for="collegename" class="fw-bold ps-3 pe-3">College Name : </label>
+                    <input type="text" id="collegename" name="collegename">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">PRN</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">MCQ Marks</th>
+                            <th scope="col">Q2 Marks</th>
+                            <th scope="col">Q3 Marks</th>
+                            <th scope="col">Action</th>
+                            <!-- <th scope="col">Total Discriptive Marks</th>
                         <th scope="col">Total Marks</th> -->
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for key,data in datas.items() %}
-                    <tr>
-                        <th scope="row">{{loop.index}}</th>
-                        <td> <input type="text" value="{{key}}" name="prn{{loop.index}}"></td>
-                        <td><input type="text" value="{{data[0].Name}} " name="name{{loop.index}}"></td>
-                        <td><input type="text" value="{{data[0].MCQ}}" name="mcq{{loop.index}}"></td>
-                        <td><input type="text" value="{{data[0].Q2}}" name="q2{{loop.index}}"></td>
-                        <td><input type="text" value="{{data[0].Q3}}" name="q3{{loop.index}}"></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for key,data in datas.items() %}
+                        <tr>
+                            <th scope="row">{{loop.index}}</th>
+                            <td> <input type="text" value="{{key}}" name="prn{{loop.index}}"></td>
+                            <td><input type="text" value="{{data[0].Name}} " name="name{{loop.index}}"></td>
+                            <td><input type="text" value="{{data[0].MCQ}}" name="mcq{{loop.index}}"></td>
+                            <td><input type="text" value="{{data[0].Q2}}" name="q2{{loop.index}}"></td>
+                            <td><input type="text" value="{{data[0].Q3}}" name="q3{{loop.index}}"></td>
 
-                        <td><button type="button" class="btn btn-primary" id="btndelete{{loop.index}}"
-                                onclick="deleterow(this)">Delete</button></td>
+                            <td><button type="button" class="btn btn-primary" id="btndelete{{loop.index}}"
+                                    onclick="deleterow(this)">Delete</button></td>
 
-                    </tr>
-                    {% endfor %}
+                        </tr>
+                        {% endfor %}
 
-                </tbody>
-                
-            </table>
-            <div class="container">
-                <button type="button" class="btn btn-primary" onclick="addrowbelow()">Add Row</button>
-                <button class="btn btn-primary" onclick="submit()">Submit</button>
-                <input type="text" name="count" id="counttotal" style="display:none" ></input>
-            </div>
-        </form>
+                    </tbody>
+
+                </table>
+                <div class="container">
+                    <button type="button" class="btn btn-primary" onclick="addrowbelow()">Add Row</button>
+                    <button class="btn btn-primary" onclick="submit()">Submit</button>
+                    <input type="text" name="count" id="counttotal" style="display:none"></input>
+                </div>
+            </form>
         </div>
 
     </section>
@@ -106,7 +110,7 @@
                 $(this).closest('tr').remove();
             });
             var count = $('#myTable tr').length;
-            console.log("--->>>> ",count)
+            console.log("--->>>> ", count)
             $("#counttotal").val(count)
 
         });
@@ -119,8 +123,8 @@
                 renum++;
 
             });
-            $("#counttotal").val(renum-1)
-            
+            $("#counttotal").val(renum - 1)
+
 
         }
         function addrowbelow() {
@@ -137,7 +141,7 @@
                                 onclick="deleterow(this)">Delete</button></td>`));
 
             $("#myTable").append(row)
-            $("#counttotal").val(count+1)
+            $("#counttotal").val(count + 1)
 
         }
     </script>

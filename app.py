@@ -1,7 +1,8 @@
-from flask import Flask
+from flask import Flask, send_file
 from flask import render_template, request, flash
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
+from ResultPdf import sendPdf
 import os
 app = Flask(__name__)
 load_dotenv('.env')
@@ -34,10 +35,12 @@ class Result(db.Model):
     q3_marks = db.Column(db.Integer, nullable=False)
     Tot_des_marks = db.Column(db.Integer, nullable=False)
     Tot_marks = db.Column(db.Integer, nullable=False)
+    subject = db.Column(db.String, nullable=False)
+    college_name = db.Column(db.String, nullable=False)
     # conform_by = db.Column(db.Integer, db.ForeignKey("admin.id"))
 
-    def __repr__(self) -> str:
-        return f"{self.id} - {self.name} - {self.seat_no}"
+    # def __repr__(self) -> str:
+    #     return f"{self.id} - {self.name} - {self.seat_no}"
 
 
 @app.route('/')
@@ -79,6 +82,8 @@ def submit():
     if request.method =='POST':
         print("--->>  ")
         count = int(request.form["count"])
+        subject_name = request.form["subname"]
+        collegename = request.form["collegename"]
         print(count)
         for i in range(1,count):
             PRN = request.form['prn'+str(i)]
@@ -92,7 +97,7 @@ def submit():
                 q2_marks = 0
                 q3_marks = 0
             print(PRN,Name,Mcq_marks,q2_marks,q3_marks)
-            Results = Result(seat_no=PRN, name=Name, Mcq_marks=Mcq_marks,q2_marks=q2_marks,q3_marks=q3_marks,Tot_des_marks=q2_marks+q3_marks,Tot_marks=q2_marks+q3_marks+Mcq_marks)
+            Results = Result(seat_no=PRN, name=Name, Mcq_marks=Mcq_marks,q2_marks=q2_marks,q3_marks=q3_marks,Tot_des_marks=q2_marks+q3_marks,Tot_marks=q2_marks+q3_marks+Mcq_marks,subject=subject_name,college_name=collegename)
             db.session.add(Results)
             db.session.commit()
         return "work"
@@ -103,13 +108,46 @@ def submit():
 def result():
     if request.method == 'POST':
         seat_no = request.form["seat_no"]
-        full_name = request.form["full_name"]
-        print(seat_no,full_name)
-        data = Result.query.filter_by(seat_no=seat_no,name=full_name).first()
-        print(data)
-        return "p"
+        # full_name = request.form["full_name"]
+        # print(seat_no,full_name)
+        data = list(db.session.execute(f"""select "subject","Mcq_marks","q2_marks","q3_marks","Tot_des_marks","Tot_marks" from result where seat_no ='{seat_no}'""").all())
+        info = list(db.session.execute(f"""select name, seat_no,college_name from result where seat_no ='{seat_no}'""").first())
+        print(info)
+        new_data2 = list()
+        new_data = list()
+        name_list = ["Subject","Mcq Marks","Q2 Marks","Q3 Marks","Total Descriptive Marks","Total Marks"]
+        new_data.append(name_list)
+        for d in data:
+            new_data2.append(list(d))
+            new_data.append(list(d))
+
+        print('---------------- >>>>>>>>>>>>> ',new_data)
+        sendPdf(new_data,info)
+        return render_template('result.html',datas=new_data2,info=info)
         # return render_template('result.html',data=data)
     else:
         return render_template('dashboard.html')
+
+@app.route('/download',methods=['GET', 'POST'])
+def download():
+    if request.method == 'POST':
+        seat_no = request.form["seat_no"]
+        # full_name = request.form["full_name"]
+        # print(seat_no,full_name)
+        data = list(db.session.execute(f"""select "subject","Mcq_marks","q2_marks","q3_marks","Tot_des_marks","Tot_marks" from result where seat_no ='{seat_no}'""").all())
+        info = list(db.session.execute(f"""select name, seat_no,college_name from result where seat_no ='{seat_no}'""").first())
+        print(info)
+        new_data2 = list()
+        new_data = list()
+        name_list = ["Subject","Mcq Marks","Q2 Marks","Q3 Marks","Total Descriptive Marks","Total Marks"]
+        new_data.append(name_list)
+        for d in data:
+            new_data2.append(list(d))
+            new_data.append(list(d))
+
+        print('---------------- >>>>>>>>>>>>> ',new_data)
+        path = sendPdf(new_data,info)
+        return send_file(path,as_attachment=True)
+        # return render_template('result.html',data=data)
 if __name__ == '__main__':
     app.run(debug=True)
