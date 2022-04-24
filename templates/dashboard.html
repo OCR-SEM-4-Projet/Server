@@ -36,19 +36,23 @@
 
 </head>
 
-<body>
-
   <section class="header-section">
-    <h1 class="logo"><a href="/">EXAM CELL MANAGEMENT SYSTEM</a></h1>
+    
+    <img src="{{ url_for('static',filename='assets/img/favicon.png')}}" alt="admin" align="left" style="width:150px;height:150px;">
+    <div class="admin_Exammine">
+          <h1 class="logo" style="font-size:10vw" ><b><a href="/">XAMMINE</a></b></h1>
+    </div>
   </section>
 
   <section class="marksheet-section" id="marksheet-section">
 
     <div class="admin-welcome">
-      <h2 class="welcome-text">Welcome Admin</h2>
-    </div>
 
-    <h1 class="txt-msg">Please upload the marksheet</h1>
+      <h2 class="welcome-text"><div style="font-size:3.5vw"><font face = "Algerian"><b>Welcome Admin</b></font></div></h2><br>
+    </div>
+    <img src="{{ url_for('static',filename='assets/img/admin.png')}}" alt="admin" style="width:450px;height:450px;" align = "right">
+
+    <br><br><h1 class="txt-msg"><font face = "Calibri">Please upload the marksheet</font></h1>
 
     <!-- take image input -->
 
@@ -84,7 +88,7 @@
         <div class="row">
 
           <div class="col-lg-3 col-md-6 footer-contact">
-            <h3>EXAM CELL MANAGEMENT SYSTEM</h3>
+            <h3>EXAMMINE</h3>
             <p>
               SIES Graduate School of Technology, Nerul, Navi Mumbai.<br><br>
               <strong>Phone:</strong> +91987654321<br>
@@ -104,12 +108,6 @@
 
 
 
-          <div class="col-lg-4 col-md-6 footer-newsletter">
-            <h4>Join Our Newsletter</h4>
-            <p>For more updates about the system, feel free to subscribe to our newsletter!</p>
-            <form action="" method="post">
-              <input type="email" name="email"><input type="submit" value="Subscribe">
-            </form>
           </div>
 
         </div>
