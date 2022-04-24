@@ -44,6 +44,7 @@
             <h1 class="welcome-text">Welcome Admin</h1>
         </div>
         <div class="container">
+            <form action="/submit" method="POST">
             <table id="myTable" class="table">
                 <thead>
                     <tr>
@@ -62,11 +63,11 @@
                     {% for key,data in datas.items() %}
                     <tr>
                         <th scope="row">{{loop.index}}</th>
-                        <td> <input type="text" value="{{key}}"></td>
-                        <td><input type="text" value="{{data[0].Name}} "></td>
-                        <td><input type="text" value="{{data[0].MCQ}}"></td>
-                        <td><input type="text" value="{{data[0].Q2}}"></td>
-                        <td><input type="text" value="{{data[0].Q3}}"></td>
+                        <td> <input type="text" value="{{key}}" name="prn{{loop.index}}"></td>
+                        <td><input type="text" value="{{data[0].Name}} " name="name{{loop.index}}"></td>
+                        <td><input type="text" value="{{data[0].MCQ}}" name="mcq{{loop.index}}"></td>
+                        <td><input type="text" value="{{data[0].Q2}}" name="q2{{loop.index}}"></td>
+                        <td><input type="text" value="{{data[0].Q3}}" name="q3{{loop.index}}"></td>
 
                         <td><button type="button" class="btn btn-primary" id="btndelete{{loop.index}}"
                                 onclick="deleterow(this)">Delete</button></td>
@@ -75,10 +76,14 @@
                     {% endfor %}
 
                 </tbody>
+                
             </table>
             <div class="container">
-                <button class="btn btn-primary" onclick="addrowbelow()">Add Row</button>
+                <button type="button" class="btn btn-primary" onclick="addrowbelow()">Add Row</button>
+                <button class="btn btn-primary" onclick="submit()">Submit</button>
+                <input type="text" name="count" id="counttotal" style="display:none" ></input>
             </div>
+        </form>
         </div>
 
     </section>
@@ -100,6 +105,9 @@
             $("#myTable").on('click', '.btnDelete', function () {
                 $(this).closest('tr').remove();
             });
+            var count = $('#myTable tr').length;
+            console.log("--->>>> ",count)
+            $("#counttotal").val(count)
 
         });
         function deleterow(r) {
@@ -111,21 +119,26 @@
                 renum++;
 
             });
+            $("#counttotal").val(renum-1)
+            
+
         }
         function addrowbelow() {
             var row = $("<tr>");
             var count = $('#myTable tr').length;
             console.log(count);
             row.append($(`<th><b>${count}</b></th>`))
-                .append($("<td scope='row'><input type='text'></td>"))
-                .append($("<td><input type='text'></td>"))
-                .append($("<td><input type='text'></td>"))
-                .append($("<td><input type='text'></td>"))
-                .append($("<td><input type='text'></td>"))
+                .append($(`<td scope='row'><input type='text' name='prn${count}' ></td>`))
+                .append($(`<td><input type='text' name='name${count}' ></td>`))
+                .append($(`<td><input type='text' name='mcq${count}' ></td>`))
+                .append($(`<td><input type='text' name='q2${count}' ></td>`))
+                .append($(`<td><input type='text' name='q3${count}' ></td>`))
                 .append($(`<td><button type="button" class="btn btn-primary"
                                 onclick="deleterow(this)">Delete</button></td>`));
 
             $("#myTable").append(row)
+            $("#counttotal").val(count+1)
+
         }
     </script>
 </body>
