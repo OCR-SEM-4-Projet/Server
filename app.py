@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 import os
 app = Flask(__name__)
 load_dotenv('.env')
-from OCRdataExtract import over_all
+from OCRdataExtract import over_all, q2_q3_marks
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres:test1234@localhost:5433/OCR"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -34,7 +34,7 @@ class Result(db.Model):
     q3_marks = db.Column(db.Integer, nullable=False)
     Tot_des_marks = db.Column(db.Integer, nullable=False)
     Tot_marks = db.Column(db.Integer, nullable=False)
-    conform_by = db.Column(db.Integer, db.ForeignKey("admin.id"))
+    # conform_by = db.Column(db.Integer, db.ForeignKey("admin.id"))
 
     def __repr__(self) -> str:
         return f"{self.id} - {self.name} - {self.seat_no}"
@@ -74,5 +74,24 @@ def uploadimg():
     else:
         return render_template('dashboard.html')
 
+@app.route("/submit", methods = ['GET', 'POST'])
+def submit():
+    if request.method =='POST':
+        print("--->>  ")
+        count = int(request.form["count"])
+        print(count)
+        for i in range(1,count):
+            PRN = request.form['prn'+str(i)]
+            Name = request.form['name'+str(i)]
+            Mcq_marks = int(request.form['mcq'+str(i)])
+            q2_marks =  int(request.form['q2'+str(i)])
+            q3_marks = int(request.form['q3'+str(i)])
+            print(PRN,Name,Mcq_marks,q2_marks,q3_marks)
+            Results = Result(seat_no=PRN, name=Name, Mcq_marks=Mcq_marks,q2_marks=q2_marks,q3_marks=q3_marks,Tot_des_marks=q2_marks+q3_marks,Tot_marks=q2_marks+q3_marks+Mcq_marks)
+            db.session.add(Results)
+            db.session.commit()
+        return "work"
+        
+    return "o"
 if __name__ == '__main__':
     app.run(debug=True)
