@@ -41,14 +41,16 @@
   <section class="marksheet-section" id="marksheet-section">
 
     <div class="admin-welcome">
-      <h1 class="welcome-text">Welcome Admin</h1>
+      <h2 class="welcome-text">Welcome Admin</h2>
     </div>
+
+    <h1 class="txt-msg">Please upload the marksheet</h1>
 
     <!-- take image input -->
 
-    <form action="/uploadimg" method="post" enctype="multipart/form-data">
+    <form class="upload-btn" action="/uploadimg" method="post" enctype="multipart/form-data">
       <div class="img-div" style="display:none" id="img-div">
-
+ 
         <img id="blah" src="#" class="marksheet-img" alt="">
         <button type="submit">Upload Image</button>
       </div>
