@@ -29,22 +29,45 @@
   <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
   <!-- Template Main CSS File -->
   <link href="{{ url_for('static',filename='assets/css/dbstyle.css')}}" rel="stylesheet">
+  <link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet"
+    type="text/css" />
+  <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+
 </head>
 
 <body>
-    
-    <section class="marksheet-section" id="marksheet-section">
 
-        <div class="admin-welcome">
-            <h1 class="welcome-text">Welcome Admin</h1>
-        </div>
+  <section class="marksheet-section" id="marksheet-section">
 
-        <div class="img-div">
-            <img src="{{ url_for('static',filename='assets/img/marksheet.png')}}" class="marksheet-img" alt="">
-        </div>
+    <div class="admin-welcome">
+      <h1 class="welcome-text">Welcome Admin</h1>
+    </div>
 
+    <!-- take image input -->
 
+    <form action="/uploadimg" method="post" enctype="multipart/form-data">
+      <div class="img-div" style="display:none" id="img-div">
 
-    </section>
+        <img id="blah" src="#" class="marksheet-img" alt="">
+        <button type="submit">Upload Image</button>
+      </div>
+      <input type='file' name="file" onchange="readURL(this);" />
+    </form>
+
+    <script>
+      function readURL(input) {
+        $("#img-div").show();
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+            $('#blah')
+              .attr('src', e.target.result)
+          };
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+    </script>
+  </section>
 
 </body>
