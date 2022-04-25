@@ -36,85 +36,90 @@
 
 </head>
 
-  <section class="header-section">
-    
-    <img src="{{ url_for('static',filename='assets/img/favicon.png')}}" alt="admin" align="left" style="width:150px;height:150px;">
-    <div class="admin_Exammine">
-          <h1 class="logo" style="font-size:10vw" ><b><a href="/">XAMMINE</a></b></h1>
-    </div>
-  </section>
+<section class="header-section">
 
-  <section class="marksheet-section" id="marksheet-section">
+  <img src="{{ url_for('static',filename='assets/img/favicon.png')}}" alt="admin" align="left"
+    style="width:150px;height:150px;">
+  <div class="admin_Exammine">
+    <h1 class="logo" style="font-size:10vw"><b><a href="/">XAMMINE</a></b></h1>
+  </div>
+</section>
 
-    <div class="admin-welcome">
+<section class="marksheet-section" id="marksheet-section">
 
-      <h2 class="welcome-text"><div style="font-size:3.5vw"><font face = "Algerian"><b>Welcome Admin</b></font></div></h2><br>
-    </div>
-    <img src="{{ url_for('static',filename='assets/img/admin.png')}}" alt="admin" style="width:450px;height:450px;" align = "right">
+  <div class="admin-welcome">
 
-    <br><br><h1 class="txt-msg"><font face = "Calibri">Please upload the marksheet</font></h1>
-
-    <!-- take image input -->
-
-    <form class="upload-btn" action="/uploadimg" method="post" enctype="multipart/form-data">
-      <div class="img-div" style="display: none;" id="img-div">
-
-        <img id="blah" src="#" class="marksheet-img" alt="">
-        <button type="submit" class="upload-img-btn">Upload to OCR</button>
+    <h2 class="welcome-text">
+      <div style="font-size:3.5vw">
+        <font face="Algerian"><b>Welcome Admin</b></font>
       </div>
-      <input class="file-upload-button" type='file' name="file" onchange="readURL(this);" />
-    </form>
+    </h2><br>
+  </div>
+  <img src="{{ url_for('static',filename='assets/img/admin.png')}}" alt="admin" style="width:450px;height:450px;"
+    align="right">
 
-    <script>
-      function readURL(input) {
-        $("#img-div").show();
-        if (input.files && input.files[0]) {
-          var reader = new FileReader();
-          reader.onload = function (e) {
-            $('#blah')
-              .attr('src', e.target.result)
-          };
-          reader.readAsDataURL(input.files[0]);
-        }
+  <br><br>
+  <h1 class="txt-msg">
+    <font face="Calibri">Please upload the marksheet</font>
+  </h1>
+  <form class="upload-btn" action="/uploadimg" method="post" enctype="multipart/form-data">
+    <div class="img-div" style="display: none;" id="img-div">
+
+      <img id="blah" src="#" class="marksheet-img" alt="">
+      <button type="submit" class="upload-img-btn">Upload to OCR</button>
+    </div>
+    <input class="file-upload-button" type='file' name="file" onchange="readURL(this);" />
+  </form>
+
+  <script>
+    function readURL(input) {
+      $("#img-div").show();
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          $('#blah')
+            .attr('src', e.target.result)
+        };
+        reader.readAsDataURL(input.files[0]);
       }
-    </script>
-  </section>
+    }
+  </script>
+</section>
 
 
-  <footer id="footer">
+<footer id="footer">
 
-    <div class="footer-top">
-      <div class="container">
-        <div class="row">
+  <div class="footer-top">
+    <div class="container">
+      <div class="row">
 
-          <div class="col-lg-3 col-md-6 footer-contact">
-            <h3>EXAMMINE</h3>
-            <p>
-              SIES Graduate School of Technology, Nerul, Navi Mumbai.<br><br>
-              <strong>Phone:</strong> +91987654321<br>
-              <strong>Email:</strong> examcell@gst.sies.edu.in<br>
-            </p>
-          </div>
-
-          <div class="col-lg-2 col-md-6 footer-links">
-            <h4>Useful Links</h4>
-            <ul>
-
-              <li><a class="bx bx-chevron-right " href="#hero">Home</a></li>
-              <li><a class="bx bx-chevron-right" href="#about">Check Result</a></li>
-              <li><a class="bx bx-chevron-right" href="#services">Admin Login</a></li>
-            </ul>
-          </div>
-
-
-
-          </div>
-
+        <div class="col-lg-3 col-md-6 footer-contact">
+          <h3>EXAMMINE</h3>
+          <p>
+            SIES Graduate School of Technology, Nerul, Navi Mumbai.<br><br>
+            <strong>Phone:</strong> +91987654321<br>
+            <strong>Email:</strong> examcell@gst.sies.edu.in<br>
+          </p>
         </div>
-      </div>
-    </div>
 
-  </footer><!-- End Footer -->
+        <div class="col-lg-2 col-md-6 footer-links">
+          <h4>Useful Links</h4>
+          <ul>
+
+            <li><a class="bx bx-chevron-right " href="#hero">Home</a></li>
+            <li><a class="bx bx-chevron-right" href="#about">Check Result</a></li>
+            <li><a class="bx bx-chevron-right" href="#services">Admin Login</a></li>
+          </ul>
+        </div>
+
+
+
+      </div>
+
+    </div>
+  </div>
+
+</footer><!-- End Footer -->
 
 </body>
 
