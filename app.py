@@ -1,5 +1,7 @@
 from flask import Flask, redirect, send_file
 from flask import render_template, request, flash
+from flask_login import LoginManager, UserMixin, login_manager, logout_user, current_user, AnonymousUserMixin, login_user
+from flask_login.utils import login_required
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 from ResultPdf import sendPdf
@@ -8,17 +10,24 @@ app = Flask(__name__)
 load_dotenv('.env')
 from OCRdataExtract import over_all, q2_q3_marks
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres:test1234@localhost:5433/OCR"
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres:test123@localhost:5433/OCR"
+# app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres:test1234@localhost:5433/OCR"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JSON_AS_ASCII'] = False
 db = SQLAlchemy(app)
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
 
 
-class admin(db.Model):
-    __tablename__ = "admin"
+class Anonymous(AnonymousUserMixin):
+    def __init__(self):
+        self.username = 'Guest'
+
+class admin(db.Model,UserMixin):
+    __tablename__ = "adminuser"
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String)
-    email = db.Column(db.String, unique=True)
     password = db.Column(db.String, unique=True)
 
     def __repr__(self) -> str:
@@ -41,6 +50,9 @@ class Result(db.Model):
 
     # def __repr__(self) -> str:
     #     return f"{self.id} - {self.name} - {self.seat_no}"
+@login_manager.user_loader
+def load_user(user_id):
+    return admin.query.get(int(user_id))
 
 
 @app.route('/')
@@ -49,14 +61,17 @@ def index():
 
 
 @app.route("/login", methods=["GET", "POST"])
-def Log_in():
+def login():
     if request.method == "GET":
         return render_template("index.html")
     elif request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
         print(username, password)
-        if username == "admin" and password == "admin":
+        cheking = admin.query.filter_by(
+                username=username, password=password).first()
+        if cheking:
+            login_user(cheking)
             return render_template("dashboard.html")
         else:
             flash("Invalid username or password")
@@ -64,6 +79,7 @@ def Log_in():
 
 
 @app.route('/uploadimg',methods=['GET','POST'])
+@login_required
 def uploadimg():
     if request.method == 'POST':
         try:
@@ -82,6 +98,7 @@ def uploadimg():
         return render_template('dashboard.html')
 
 @app.route("/submit", methods = ['GET', 'POST'])
+@login_required
 def submit():
     if request.method =='POST':
         try:
@@ -105,7 +122,7 @@ def submit():
                 Results = Result(seat_no=PRN, name=Name, Mcq_marks=Mcq_marks,q2_marks=q2_marks,q3_marks=q3_marks,Tot_des_marks=q2_marks+q3_marks,Tot_marks=q2_marks+q3_marks+Mcq_marks,subject=subject_name,college_name=collegename)
                 db.session.add(Results)
                 db.session.commit()
-                flash("Successfully added")
+            flash("Successfully added")
         except Exception as e:
             print(e)
             flash("Error")
@@ -169,5 +186,11 @@ def download():
             return render_template('index.html')
 
         # return render_template('result.html',data=data)
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('Logout Succesfully')
+    return render_template('index.html')
 if __name__ == '__main__':
     app.run(debug=True)
