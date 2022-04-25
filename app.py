@@ -1,3 +1,4 @@
+import datetime
 from flask import Flask, redirect, send_file
 from flask import render_template, request, flash
 from flask_login import LoginManager, UserMixin, login_manager, logout_user, current_user, AnonymousUserMixin, login_user
@@ -46,6 +47,7 @@ class Result(db.Model):
     Tot_marks = db.Column(db.Integer, nullable=False)
     subject = db.Column(db.String, nullable=False)
     college_name = db.Column(db.String, nullable=False)
+    date = db.Column(db.Date, nullable=False,default=datetime.datetime.now())
     # conform_by = db.Column(db.Integer, db.ForeignKey("admin.id"))
 
     # def __repr__(self) -> str:
@@ -134,11 +136,16 @@ def submit():
 def result():
     if request.method == 'POST':
         try:
-            seat_no = request.form["seat_no"]
+            seat_nos = request.form["seat_no"]
             # full_name = request.form["full_name"]
             # print(seat_no,full_name)
-            data = list(db.session.execute(f"""select "subject","Mcq_marks","q2_marks","q3_marks","Tot_des_marks","Tot_marks" from result where seat_no ='{seat_no}'""").all())
-            info = list(db.session.execute(f"""select name, seat_no,college_name from result where seat_no ='{seat_no}'""").first())
+            current_date = datetime.datetime.now()
+            six_month_before = current_date - datetime.timedelta(days=180)
+            six_month_before=six_month_before.strftime("%Y-%m-%d")
+            current_date=current_date.strftime("%Y-%m-%d")
+            print(six_month_before,current_date)
+            data = list(db.session.query(Result.subject,Result.Mcq_marks,Result.q3_marks,Result.q3_marks,Result.Tot_des_marks,Result.Tot_marks).filter(Result.seat_no==seat_nos and Result.date.between(six_month_before,current_date)).all())
+            info = list(db.session.execute(f"""select name, seat_no,college_name from result where seat_no ='{seat_nos}'""").first())
             print(info)
             new_data2 = list()
             new_data = list()
