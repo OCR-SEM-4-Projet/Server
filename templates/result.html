@@ -39,20 +39,23 @@
 <body>
 
     <section class="marksheet-section" id="marksheet-section">
-
+        <div class="e-position">
+            <img src="{{ url_for('static',filename='assets/img/favicon.png')}}" alt="admin" align="left" style="width:80px;height:80px;">
+          </div>
+          <h1 style="font-size:6vw">XAMMINE</h1>
         <div class="admin-welcome">
-            <h1 class="welcome-text">Welcome Admin</h1>
+            <h1 class="welcome-text">Welcome {{info[0]}}</h1><br><br>
         </div>
         <div class="container">
             <form action="/download" method="post">
 
                 <table id="myTable" class="table">
 
-                    <b class="fw-bold pe-3">Student Name : {{info[0]}} </b>
+                    <br><b class="fw-bold pe-3">Student Name : {{info[0]}} </b>
                     <b class="fw-bold ps-3 pe-3">Prn Number : {{info[1]}}</b>
                     <input type="number" class="form-control" id="floatingInput" style="display:none" name="seat_no"
                         value="{{info[1]}}">
-                    <b class="fw-bold ps-3 pe-3">College Name : {{info[2]}}</b>
+                    <b class="fw-bold ps-3 pe-3">College Name : {{info[2]}}</b><br>
                     <thead>
                         <tr>
                             <th scope="col">#</th>

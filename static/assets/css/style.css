@@ -536,6 +536,11 @@ section {
     color: #5a5af3;
 }
 
+.e-position {
+    position: relative left;
+    left: 20px;
+}
+
 #footer .footer-top .footer-contact p {
     font-size: 14px;
     line-height: 24px;
