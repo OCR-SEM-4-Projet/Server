@@ -1,7 +1,7 @@
 import datetime
 from flask import Flask, redirect, send_file
 from flask import render_template, request, flash
-from flask_login import LoginManager, UserMixin, login_manager, logout_user, current_user, AnonymousUserMixin, login_user
+from flask_login import LoginManager, login_manager, logout_user, AnonymousUserMixin, login_user
 from flask_login.utils import login_required
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
@@ -15,43 +15,16 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres:test123@localhost
 # app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres:test1234@localhost:5433/OCR"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JSON_AS_ASCII'] = False
-db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
-
-
+from models import db
+db.init_app(app)
+from models.Result import Result
+from models.Admin import admin
 class Anonymous(AnonymousUserMixin):
     def __init__(self):
         self.username = 'Guest'
-
-class admin(db.Model,UserMixin):
-    __tablename__ = "adminuser"
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String)
-    password = db.Column(db.String, unique=True)
-
-    def __repr__(self) -> str:
-        return f"{self.id} - {self.username}"
-
-
-class Result(db.Model):
-    __tablename__ = "result"
-    id = db.Column(db.Integer, primary_key=True)
-    seat_no = db.Column(db.String)
-    name = db.Column(db.String)
-    Mcq_marks = db.Column(db.Integer, nullable=False)
-    q2_marks = db.Column(db.Integer, nullable=False)
-    q3_marks = db.Column(db.Integer, nullable=False)
-    Tot_des_marks = db.Column(db.Integer, nullable=False)
-    Tot_marks = db.Column(db.Integer, nullable=False)
-    subject = db.Column(db.String, nullable=False)
-    college_name = db.Column(db.String, nullable=False)
-    date = db.Column(db.Date, nullable=False,default=datetime.datetime.now())
-    # conform_by = db.Column(db.Integer, db.ForeignKey("admin.id"))
-
-    # def __repr__(self) -> str:
-    #     return f"{self.id} - {self.name} - {self.seat_no}"
 @login_manager.user_loader
 def load_user(user_id):
     return admin.query.get(int(user_id))
