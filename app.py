@@ -9,7 +9,7 @@ from ResultPdf import sendPdf
 import os
 app = Flask(__name__)
 load_dotenv('.env')
-from OCRdataExtract import over_all, q2_q3_marks
+from OCRdataExtract import over_all
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres:test123@localhost:5433/OCR"
 # app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres:test1234@localhost:5433/OCR"
