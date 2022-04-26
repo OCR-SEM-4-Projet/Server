@@ -77,16 +77,16 @@ def sendPdf(data,info):
 
     # Generate PDF
     archivo_pdf = SimpleDocTemplate(
-        'SMS Data Report.pdf',
+        'Report Card.pdf',
         pagesize=letter,
         rightMargin=40,
         leftMargin=40,
         topMargin=40,
         bottomMargin=28)
     archivo_pdf.build(elements)
-    print('SMS Data Forensic Report Generated!')
+    print('Report Card Generated!')
     import os
-    return os.path.join('','SMS Data Report.pdf')
+    return os.path.join('','Report Card.pdf')
 if __name__ == '__main__':
     with open('smsInfo.csv', "r") as csvfile:
         data = list(csv.reader(csvfile))
