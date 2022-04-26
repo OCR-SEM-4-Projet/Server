@@ -14,7 +14,7 @@ def submits():
             collegename = request.form["collegename"]
             print(count)
             for i in range(1,count):
-                PRN = request.form['prn'+str(i)]
+                Prn = request.form['prn'+str(i)]
                 Name = request.form['name'+str(i)]
                 try:
                     Mcq_marks = int(request.form['mcq'+str(i)])
@@ -24,8 +24,10 @@ def submits():
                     Mcq_marks = 0
                     q2_marks = 0
                     q3_marks = 0
-                print(PRN,Name,Mcq_marks,q2_marks,q3_marks)
-                Results = Result(seat_no=PRN, name=Name, Mcq_marks=Mcq_marks,q2_marks=q2_marks,q3_marks=q3_marks,Tot_des_marks=q2_marks+q3_marks,Tot_marks=q2_marks+q3_marks+Mcq_marks,subject=subject_name,college_name=collegename)
+                Tot_des_marks=q2_marks+q3_marks
+                Tot_marks=q2_marks+q3_marks+Mcq_marks
+                print(Prn,Name,Mcq_marks,q2_marks,q3_marks)
+                Results = Result(seat_no=Prn, name=Name, Mcq_marks=Mcq_marks,q2_marks=q2_marks,q3_marks=q3_marks,Tot_des_marks=Tot_des_marks,Tot_marks=Tot_marks,subject=subject_name,college_name=collegename)
                 db.session.add(Results)
                 db.session.commit()
             flash("Successfully added")
