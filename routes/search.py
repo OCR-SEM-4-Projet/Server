@@ -1,5 +1,5 @@
 from flask import Blueprint, redirect,render_template,request,flash,send_file
-from app import db
+from models import db
 from models.Markshit import markshit
 from public.ResultPdf import sendPdf
 search = Blueprint(name="search", import_name=__name__)

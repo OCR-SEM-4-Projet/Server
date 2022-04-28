@@ -3,7 +3,7 @@ from flask_login import login_required
 
 from models.Markshit import markshit
 view = Blueprint(name="view", import_name=__name__)
-from app import db
+from models import db
 from models.Result import Result
 @view.route("<int:id>", methods=['GET','POST'])
 @login_required

@@ -1,5 +1,5 @@
 from flask import Blueprint,render_template,request,flash
-from app import db
+from models import db
 from models.Result import Result
 import datetime
 from public.ResultPdf import sendPdf

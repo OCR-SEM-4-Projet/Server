@@ -1,5 +1,5 @@
 from flask import Blueprint,render_template,request,flash,send_file
-from app import db
+from models import db
 from public.ResultPdf import sendPdf
 download = Blueprint(name="download", import_name=__name__)
 @download.route('',methods=['POST'])

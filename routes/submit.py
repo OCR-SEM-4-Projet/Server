@@ -3,7 +3,7 @@ from flask_login import login_required
 
 from models.Markshit import markshit
 submit = Blueprint(name="submit", import_name=__name__)
-from app import db
+from models import db
 from models.Result import Result
 @submit.route("", methods=['GET','POST'])
 @login_required
