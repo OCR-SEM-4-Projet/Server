@@ -12,7 +12,7 @@ def searchs():
         subject = request.form["subject"]
         print(collegename,branch,semester,subject)
         try:
-            markshit_search = markshit.query.filter(markshit.collegename==collegename,markshit.branch==branch,markshit.semester==semester,markshit.subject==subject).all()
+            markshit_search = markshit.query.filter(markshit.collegename==collegename,markshit.branch==branch,markshit.semester==semester,markshit.subject==subject,markshit.isvalid==True).all()
             
             db.session.commit()
             print('--->>>>',markshit_search)
