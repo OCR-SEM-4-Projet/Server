@@ -91,6 +91,9 @@ html {
 .upload-img-btn {
     margin-top: 20px;
     float: left;
+    border-radius: 10px;
+    background-color:#2a2af0;
+    color: white;
 }
 
 .logo {
