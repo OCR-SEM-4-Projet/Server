@@ -194,6 +194,8 @@ h6 {
     }
     .navbar ul {
         display: none;
+        position: right;
+        margin: 0;
     }
 }
 
