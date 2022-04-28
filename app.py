@@ -10,9 +10,11 @@ from routes.submit import submit
 from routes.result import result
 from routes.download import download
 from routes.logout import logout
+from routes.view import view
+from routes.search import search
+from middleware.auth import *
 app = Flask(__name__)
 load_dotenv('.env')
-from middleware.auth import *
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get('DATABASE_URL')
 # app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres:test1234@localhost:5433/OCR"
@@ -27,6 +29,8 @@ app.register_blueprint(submit,url_prefix='/submit')
 app.register_blueprint(result,url_prefix='/result')
 app.register_blueprint(download,url_prefix='/download')
 app.register_blueprint(logout,url_prefix='/logout')
+app.register_blueprint(view,url_prefix='/view')
+app.register_blueprint(search,url_prefix='/search')
 
 
 if __name__ == '__main__':

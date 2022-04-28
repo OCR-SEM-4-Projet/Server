@@ -1,5 +1,5 @@
-import datetime
 from . import db
+from .Markshit import markshit
 class Result(db.Model):
     __tablename__ = "result"
     id = db.Column(db.Integer, primary_key=True)
@@ -10,6 +10,7 @@ class Result(db.Model):
     q3_marks = db.Column(db.Integer, nullable=False)
     Tot_des_marks = db.Column(db.Integer, nullable=False)
     Tot_marks = db.Column(db.Integer, nullable=False)
-    subject = db.Column(db.String, nullable=False)
-    college_name = db.Column(db.String, nullable=False)
-    date = db.Column(db.Date, nullable=False,default=datetime.datetime.now())
+    markshit_id = db.Column(db.Integer, db.ForeignKey('markshit.id'))
+
+    def __repr__(self):
+        return f"{self.id} - {self.seat_no}"

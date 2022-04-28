@@ -47,6 +47,8 @@
 
 <section class="marksheet-section" id="marksheet-section">
 
+  <!-- <img src="{{ url_for('static',filename='assets/img/admin.png')}}" alt="admin" style="width:450px;height:450px;"
+    align="right"> -->
   <div class="admin-welcome">
 
     <h2 class="welcome-text">
@@ -55,8 +57,6 @@
       </div>
     </h2><br>
   </div>
-  <img src="{{ url_for('static',filename='assets/img/admin.png')}}" alt="admin" style="width:450px;height:450px;"
-    align="right">
 
   <br><br>
   {% with messages=get_flashed_messages() %} {% if messages %} {% for message in
@@ -90,8 +90,62 @@
     }
   </script>
 </section>
+<br>
+<br>
+<div class="container px-5 pt-5">
+  <form action="/search" method="post">
+    <h2>Search Marksheet</h2>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Collegename</label>
+      <input type="text" name="collegename" class="form-control" id="exampleInputPassword1">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Semester</label>
+      <input type="text" name="semester" class="form-control" id="exampleInputPassword1">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Branch</label>
+      <input type="text" name="branch" class="form-control" id="exampleInputPassword1">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Subject</label>
+      <input type="text" name="subject" class="form-control" id="exampleInputPassword1">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+<div class="container px-4 px-lg-5 mt-5">
+  <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+    {% for i in markshit_list %}
 
-
+    <div class="col mb-5">
+      <div class="card h-100">
+        <!-- Product image-->
+        <!-- <h1>{{i.image_url}}</h1> -->
+        <img class="card-img-top" src="{{ url_for('static',filename='OCR/images/'+i.image_url)}}" alt="..."
+          width=auto />
+        <!-- Product details-->
+        <div class="card-body p-4">
+          <div class="text-center">
+            <!-- Product name-->
+            <p class="title fw-bolder" style="border-bottom: 4px solid #1acc8d;">College - {{i.collegename}}</p>
+            <!-- Product price-->
+            <br>
+            <p>Semester - {{i.semester}}</p>
+            <p>Branch - {{i.branch}}</p>
+            <p>Subject - {{i.subject}}</p>
+          </div>
+        </div>
+        <!-- Product actions-->
+        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+          <div class="text-center"><a class="btn-get-started" href="/view/{{i.id}}">View</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
 <footer id="footer">
 
   <div class="footer-top">

@@ -5,7 +5,7 @@ from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import *
 from reportlab.lib.styles import getSampleStyleSheet
-def sendPdf(data,info):
+def sendPdf(data,info,prn):
     elements = []
 
     # PDF Text
@@ -14,15 +14,17 @@ def sendPdf(data,info):
     styleNormal = styles['Normal']
 
     # PDF Text - Content
-    line1 = 'Name : '+str(info[0])
-    line2 = 'Date : {}'.format(datetime.datetime.now().strftime("%d-%m-%y"))
-    line3 = 'Prn Number : '+str(info[1])
-    line4 = 'College Name : '+str(info[2])
+    line1 = 'Name : '+str(info[0][0])
+    line3 = 'Prn Number : '+str(prn)
+    line4 = 'College Name : '+str(info[0][2])
+    line5 = 'Branch : '+str(info[0][1])
+    line6 = 'Semester : '+str(info[0][3])
 
     elements.append(Paragraph(line1, styleNormal))
-    elements.append(Paragraph(line2, styleNormal))
     elements.append(Paragraph(line3, styleNormal))
     elements.append(Paragraph(line4, styleNormal))
+    elements.append(Paragraph(line5, styleNormal))
+    elements.append(Paragraph(line6, styleNormal))
     elements.append(Spacer(inch, .25 * inch))
 
     # PDF Table

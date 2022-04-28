@@ -1,6 +1,8 @@
-from flask import Blueprint,render_template,request,flash
+from flask import Blueprint, redirect,render_template,request,flash
 from flask_login import login_user
+from models import db
 from models.Admin import admin
+from models.Markshit import markshit
 login = Blueprint(name="login", import_name=__name__)
 @login.route("", methods=['GET','POST'])
 def logins():
@@ -16,7 +18,7 @@ def logins():
                 username=username, password=password).first()
         if cheking:
             login_user(cheking)
-            return render_template("dashboard.html")
+            return redirect('/uploadimg')
         else:
             flash("Invalid username or password")
             return render_template("index.html")

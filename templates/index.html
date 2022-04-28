@@ -37,11 +37,12 @@
 
   <header id="header" class="fixed-top ">
     <div class="container justify-content-between">
-      <img src="{{ url_for('static',filename='assets/img/favicon.png')}}" alt="admin" align="left" style="width:101px;height:101px;">
+      <img src="{{ url_for('static',filename='assets/img/favicon.png')}}" alt="admin" align="left"
+        style="width:101px;height:101px;">
 
-            <h1 class="logo" style="font-size:8vw" align = "left"><b><a href="/">XAMMINE</a></b></h1>
+      <h1 class="logo" style="font-size:8vw" align="left"><b><a href="/">XAMMINE</a></b></h1>
     </div>
-  
+
     <div class="container d-flex justify-cotent-right">
 
       <nav id="navbar" class="navbar">
@@ -53,7 +54,7 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
     </div>
-  
+
   </header><!-- End Header -->
 
   <!-- ======= Hero Section ======= -->
@@ -93,8 +94,12 @@
             <h2>Check Your Result</h2>
           </div>
           <div class="form-floating mb-3">
-            <input type="number" class="form-control" id="floatingInput" placeholder="name@example.com" name="seat_no">
+            <input type="text" class="form-control" id="floatingInput" name="seat_no">
             <label for="floatingInput">Seat Number</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" name="semester">
+            <label for="floatingInput">Semester</label>
           </div>
 
 
@@ -140,10 +145,11 @@
         <div class="row">
 
           <div class="col-lg-3 col-md-6 footer-contact">
-              <div class="e-position">
-                <img src="{{ url_for('static',filename='assets/img/favicon.png')}}" alt="admin" align="left" style="width:28px;height:28px;">
-              </div>
-              <h3>XAMMINE</h3>
+            <div class="e-position">
+              <img src="{{ url_for('static',filename='assets/img/favicon.png')}}" alt="admin" align="left"
+                style="width:28px;height:28px;">
+            </div>
+            <h3>XAMMINE</h3>
             <p>
               SIES Graduate School of Technology, Nerul, Navi Mumbai.<br><br>
               <strong>Phone:</strong> +91987654321<br>
@@ -163,7 +169,7 @@
 
 
 
-          
+
 
         </div>
       </div>

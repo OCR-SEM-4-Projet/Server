@@ -44,16 +44,21 @@
             <h1 class="welcome-text">Welcome Admin</h1>
         </div>
         <div class="container">
-            <form action="/submit" method="POST">
+            <form action="/view/{{id}}" id="myform" method="POST">
                 <table id="myTable" class="table">
-                    <label for="subname" class="fw-bold pe-3">Subject Name : </label>
-                    <input type="text" id="subname" name="subname">
-                    <label for="collegename" class="fw-bold ps-3 pe-3">College Name : </label>
-                    <input type="text" id="collegename" name="collegename">
-                    <label for="semester" class="fw-bold ps-3 pe-3">Semester : </label>
-                    <input type="text" id="semester" name="semester">
-                    <label for="branchname" class="fw-bold ps-3 pe-3">Branch Name : </label>
-                    <input type="text" id="branchname" name="branchname">
+                    <div class="cols">
+
+                        <p for="subname" style="display:inline" class="fw-bold pe-3">Subject Name :
+                            {{markshit_data.subject}} </p>
+                        <p for="collegename" style="display:inline" class="fw-bold pe-3">College Name :
+                            {{markshit_data.collegename}} </p>
+                        <br>
+                        <br>
+                        <p for="semester" style="display:inline" class="fw-bold pe-5">Semester :
+                            {{markshit_data.semester}}</p>
+                        <p for="branchname" style="display:inline" class="fw-bold ps-3 pe-3">Branch Name :
+                            {{markshit_data.branch}}</p>
+                    </div>
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -62,23 +67,19 @@
                             <th scope="col">MCQ Marks</th>
                             <th scope="col">Q2 Marks</th>
                             <th scope="col">Q3 Marks</th>
-                            <th scope="col">Action</th>
                             <!-- <th scope="col">Total Discriptive Marks</th>
                         <th scope="col">Total Marks</th> -->
                         </tr>
                     </thead>
                     <tbody>
-                        {% for key,data in datas.items() %}
+                        {% for data in datas %}
                         <tr>
                             <th scope="row">{{loop.index}}</th>
-                            <td> <input type="text" value="{{key}}" name="prn{{loop.index}}"></td>
-                            <td><input type="text" value="{{data[0].Name}} " name="name{{loop.index}}"></td>
-                            <td><input type="text" value="{{data[0].MCQ}}" name="mcq{{loop.index}}"></td>
-                            <td><input type="text" value="{{data[0].Q2}}" name="q2{{loop.index}}"></td>
-                            <td><input type="text" value="{{data[0].Q3}}" name="q3{{loop.index}}"></td>
-
-                            <td><button type="button" class="btn btn-primary" id="btndelete{{loop.index}}"
-                                    onclick="deleterow(this)">Delete</button></td>
+                            <td> <input type="text" value="{{data.seat_no}}" name="prn{{data.id}}"></td>
+                            <td><input type="text" value="{{data.name}} " name="name{{data.id}}"></td>
+                            <td><input type="text" value="{{data.Mcq_marks}}" name="mcq{{data.id}}"></td>
+                            <td><input type="text" value="{{data.q2_marks}}" name="q2{{data.id}}"></td>
+                            <td><input type="text" value="{{data.q3_marks}}" name="q3{{data.id}}"></td>
 
                         </tr>
                         {% endfor %}
@@ -87,8 +88,7 @@
 
                 </table>
                 <div class="container">
-                    <button type="button" class="btn btn-primary" onclick="addrowbelow()">Add Row</button>
-                    <button class="btn btn-primary" onclick="submit()">Submit</button>
+                    <button class="btn btn-primary" type="submit">Submit</button>
                     <input type="text" name="count" id="counttotal" style="display:none"></input>
                 </div>
             </form>
