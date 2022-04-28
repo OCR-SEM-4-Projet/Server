@@ -252,3 +252,9 @@ html {
 #footer .footer-newsletter form input[type="submit"]:hover {
     background: #7272f5;
 }
+
+.fw-bold{
+    width: 120px;
+    font-size: 17px;
+    text-align: center;
+}
