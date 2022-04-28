@@ -44,7 +44,20 @@
     <h1 class="logo" style="font-size:10vw"><b><a href="/">XAMMINE</a></b></h1>
   </div>
 </section>
-
+  </div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link active" href="/">Home</a>
+          <a class="nav-link active" href="#about">Check Result</a>
+        </div>
+      </div>
+    </div>
+  </nav>
 <section class="marksheet-section" id="marksheet-section">
 
   <div class="admin-welcome">
@@ -55,10 +68,12 @@
       </div>
     </h2><br>
   </div>
+
   <img src="{{ url_for('static',filename='assets/img/admin.png')}}" alt="admin" style="width:450px;height:450px;"
     align="right">
 
   <br><br>
+  
   {% with messages=get_flashed_messages() %} {% if messages %} {% for message in
   messages %}
   <script>alert("{{message}}")</script>
