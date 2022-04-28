@@ -39,7 +39,7 @@
 <section class="header-section">
 
   <img src="{{ url_for('static',filename='assets/img/favicon.png')}}" alt="admin" align="left"
-    style="width:150px;height:150px;">
+    style="width:135px;height:135px;">
   <div class="admin_Exammine">
     <h1 class="logo" style="font-size:10vw"><b><a href="/">XAMMINE</a></b></h1>
   </div>
@@ -53,7 +53,7 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-link active" href="/">Home</a>
-          <a class="nav-link active" href="#about">Check Result</a>
+          <a class="nav-link active" href="/result">Check Result</a>
         </div>
       </div>
     </div>
@@ -114,7 +114,10 @@
       <div class="row">
 
         <div class="col-lg-3 col-md-6 footer-contact">
-          <h3>EXAMMINE</h3>
+          <div class="e-position">
+            <img src="{{ url_for('static',filename='assets/img/favicon.png')}}" alt="admin" align="left" style="width:28px;height:28px;">
+          </div>
+          <h3>XAMMINE</h3>
           <p>
             SIES Graduate School of Technology, Nerul, Navi Mumbai.<br><br>
             <strong>Phone:</strong> +91987654321<br>
@@ -126,7 +129,7 @@
           <h4>Useful Links</h4>
           <ul>
 
-            <li><a class="bx bx-chevron-right " href="#hero">Home</a></li>
+            <li><a class="bx bx-chevron-right " href="/">Home</a></li>
             <li><a class="bx bx-chevron-right" href="/logout">Logout</a></li>
           </ul>
         </div>
