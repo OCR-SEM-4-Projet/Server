@@ -74,10 +74,7 @@
 
   <br><br>
 
-  {% with messages=get_flashed_messages() %} {% if messages %} {% for message in
-  messages %}
   <script>alert("{{message}}")</script>
-  {% endfor %} {% endif %} {% endwith %}
   <h1 class="txt-msg">
     <font face="Calibri">Please upload the marksheet</font>
   </h1>
@@ -158,7 +155,6 @@
         </div>
       </div>
     </div>
-    {% endfor %}
   </div>
 </div>
 <footer id="footer">
