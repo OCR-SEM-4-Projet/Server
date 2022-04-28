@@ -11,7 +11,7 @@ a {
 
 a:hover {
     color: #1064b2cc;
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 h1,
@@ -44,8 +44,19 @@ html {
     margin-left: 400px;
 }
 
+.container-fluid{
+    background-color: #C0C0C0;
+    margin-top: -9px;
+    margin-bottom: -9px;
+}
+
 .navbar-nav {
     margin-left: 50px;
+    background-color: #C0C0C0;
+}
+
+.navbar{
+    background-color: #C0C0C0;
 }
 
 .nav-link{
