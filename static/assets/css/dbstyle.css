@@ -44,8 +44,17 @@ html {
     margin-left: 400px;
 }
 
+.navbar-nav {
+    margin-left: 50px;
+}
+
+.nav-link{
+    color: #2a2af0;
+}
+
 .welcome-text {
     color: #de6da4;
+    margin-left: 150px;
 }
 
 .img-div {

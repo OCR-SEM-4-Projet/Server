@@ -15,7 +15,8 @@ from middleware.auth import *
 def create_app(app):
     load_dotenv('.env')
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-    app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get('DATABASE_URL')
+    # app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get('DATABASE_URL')
+    app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres:123@localhost:5432/OCR"
     # app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres:test1234@localhost:5433/OCR"
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['JSON_AS_ASCII'] = False
