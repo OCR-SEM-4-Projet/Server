@@ -49,7 +49,7 @@
         <ul>
           <li><a class="nav-link scrollto " href="#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">Check Result</a></li>
-          <li><a class="nav-link scrollto" href="#services">Admin Login</a></li>
+          <li><a class="nav-link scrollto" href="#admin-login">Admin Login</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -112,7 +112,7 @@
     <section id="services" class="services">
       <div class="container">
 
-        <div class="section-title">
+        <div class="section-title" id="admin-login">
           <h2>Admin Log In</h2>
           <!-- showing flash message -->
           {% with messages=get_flashed_messages() %} {% if messages %} {% for message in
@@ -132,7 +132,7 @@
 
             <div class="text-center"><button type="submit">Log In</button></div>
           </form>
-        </div>
+      </div>
     </section>
 
   </main>
@@ -163,7 +163,7 @@
 
               <li><a class="bx bx-chevron-right " href="#hero">Home</a></li>
               <li><a class="bx bx-chevron-right" href="#about">Check Result</a></li>
-              <li><a class="bx bx-chevron-right" href="#services">Admin Login</a></li>
+              <li><a class="bx bx-chevron-right" href="#admin-login">Admin Login</a></li>
             </ul>
           </div>
 
