@@ -10,6 +10,7 @@ instance/*
 .env
 ### OCR Images ###
 static/OCR/images/*
+!static/OCR/images/.gitkeep 
 OCR/images/*
 ### SQLTools ###
 *.session.sql
