@@ -40,35 +40,39 @@
     <section class="marksheet-section" id="marksheet-section">
         <div class="e-position">
             <a href="/">
-            <img src="{{ url_for('static',filename='assets/img/favicon.png')}}" alt="admin" align="left" style="width:80px;height:80px;">
+                <img src="{{ url_for('static',filename='assets/img/favicon.png')}}" alt="admin" align="left"
+                    style="width:80px;height:80px;">
             </a>
         </div>
-          <h1 style="font-size:6vw"><a href="/"><b>XAMMINE</b></a></h1>
+        <h1 style="font-size:6vw"><a href="#"><b>XAMMINE</b></a></h1>
 
-          <!-- navbar -->
-          <nav class="navbar navbar-expand-lg navbar-light">
+        <!-- navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                  <a class="nav-link active" href="/"><font color = "black">Home</font></a>
-                  <a class="nav-link active" href="/uploadimg"><font color = "black">Admin Page</font></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-link active" href="/logout">
+                            <font color="black">Logout</font>
+                        </a>
+                        <a class="nav-link active" href="/uploadimg">
+                            <font color="black">Admin Page</font>
+                        </a>
+                    </div>
                 </div>
-              </div>
             </div>
-          </nav> <!-- navbar -->
+        </nav> <!-- navbar -->
 
         <div class="admin-welcome">
             <h1 class="welcome-text" style="font-size:4vw"><b>&nbsp;&nbsp;&nbsp;Welcome Admin</b></h1>
         </div>
+        <br>
+        <br>
 
-        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-        <button class="btn btn-outline-primary me-md-2"><font color = "white" style="margin:30px"><a href="/uploadimg">Back</a></font></button>
-        </div><br>
-        
         <div class="container">
             <form action="/submit" method="POST">
                 <table id="myTable" class="table">
