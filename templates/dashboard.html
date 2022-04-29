@@ -38,10 +38,10 @@
 
 <section class="header-section">
 
-  <img src="{{ url_for('static',filename='assets/img/favicon.png')}}" alt="admin" align="left"
+  <img src="{{ url_for('static',filename='assets/img/favicon.png')}}" alt="admin" align = "left"
     style="width:135px;height:135px;">
   <div class="admin_Exammine">
-    <h1 class="logo" style="font-size:10vw"><b><a href="#">XAMMINE</a></b></h1>
+    <h1 class="logo" style="font-size:10vw"><b><a href="/">XAMMINE</a></b></h1>
   </div>
 </section>
 </div>
@@ -53,9 +53,8 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link active" href="#">Home</a>
-        <a class="nav-link active" href="#services">Search Markshit</a>
-        <a class="nav-link active" href="/logout">Logout</a>
+        <a class="nav-link active" href="/">Home</a>
+        <a class="nav-link active" href="/result">Check Result</a>
       </div>
     </div>
   </div>
@@ -108,62 +107,60 @@
 </section>
 <br>
 <br>
-<section id="services" class="services">
-  <div class="container px-5 pt-5">
-    <form action="/search" method="post">
-      <h2>Search Marksheet</h2>
-      <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Collegename</label>
-        <input type="text" name="collegename" class="form-control" id="exampleInputPassword1">
-      </div>
-      <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Semester</label>
-        <input type="text" name="semester" class="form-control" id="exampleInputPassword1">
-      </div>
-      <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Branch</label>
-        <input type="text" name="branch" class="form-control" id="exampleInputPassword1">
-      </div>
-      <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Subject</label>
-        <input type="text" name="subject" class="form-control" id="exampleInputPassword1">
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-  </div>
-  <div class="container px-4 px-lg-5 mt-5">
-    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-      {% for i in markshit_list %}
+<div class="container px-5 pt-5">
+  <form action="/search" method="post">
+    <h2>Search Marksheet</h2>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Collegename</label>
+      <input type="text" name="collegename" class="form-control" id="exampleInputPassword1">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Semester</label>
+      <input type="text" name="semester" class="form-control" id="exampleInputPassword1">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Branch</label>
+      <input type="text" name="branch" class="form-control" id="exampleInputPassword1">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Subject</label>
+      <input type="text" name="subject" class="form-control" id="exampleInputPassword1">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+<div class="container px-4 px-lg-5 mt-5">
+  <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+    {% for i in markshit_list %}
 
-      <div class="col mb-5">
-        <div class="card h-100">
-          <!-- Product image-->
-          <!-- <h1>{{i.image_url}}</h1> -->
-          <img class="card-img-top" src="{{ url_for('static',filename='OCR/images/'+i.image_url)}}" alt="..."
-            width=auto />
-          <!-- Product details-->
-          <div class="card-body p-4">
-            <div class="text-center">
-              <!-- Product name-->
-              <p class="title fw-bolder" style="border-bottom: 4px solid #1acc8d;">College - {{i.collegename}}</p>
-              <!-- Product price-->
-              <br>
-              <p>Semester - {{i.semester}}</p>
-              <p>Branch - {{i.branch}}</p>
-              <p>Subject - {{i.subject}}</p>
-            </div>
+    <div class="col mb-5">
+      <div class="card h-100">
+        <!-- Product image-->
+        <!-- <h1>{{i.image_url}}</h1> -->
+        <img class="card-img-top" src="{{ url_for('static',filename='OCR/images/'+i.image_url)}}" alt="..."
+          width=auto />
+        <!-- Product details-->
+        <div class="card-body p-4">
+          <div class="text-center">
+            <!-- Product name-->
+            <p class="title fw-bolder" style="border-bottom: 4px solid #1acc8d;">College - {{i.collegename}}</p>
+            <!-- Product price-->
+            <br>
+            <p>Semester - {{i.semester}}</p>
+            <p>Branch - {{i.branch}}</p>
+            <p>Subject - {{i.subject}}</p>
           </div>
-          <!-- Product actions-->
-          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-            <div class="text-center"><a class="btn-get-started" href="/view/{{i.id}}">View</a>
-            </div>
+        </div>
+        <!-- Product actions-->
+        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+          <div class="text-center"><a class="btn-get-started" href="/view/{{i.id}}">View</a>
           </div>
         </div>
       </div>
-      {% endfor %}
     </div>
+    {% endfor %}
   </div>
-</section>
+</div>
 <footer id="footer">
 
   <div class="footer-top">
@@ -186,18 +183,8 @@
         <div class="col-lg-2 col-md-6 footer-links">
           <h4>Useful Links</h4>
           <ul>
-            <li>
-
-              <a class="bx bx-chevron-right" href="#">Home</a>
-            </li>
-            <li>
-
-              <a class="bx bx-chevron-right" href="#services">Search Markshit</a>
-            </li>
-            <li>
-
-              <a class="bx bx-chevron-right" href="/logout">Logout</a>
-            </li>
+            <li><a class="bx bx-chevron-right " href="/">Home</a></li>
+            <li><a class="bx bx-chevron-right" href="/logout">Logout</a></li>
           </ul>
         </div>
 
