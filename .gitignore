@@ -8,6 +8,7 @@ instance/*
 !instance/.gitignore
 .webassets-cache
 .env
+test.csv
 ### OCR Images ###
 static/OCR/images/*
 !static/OCR/images/.gitkeep 

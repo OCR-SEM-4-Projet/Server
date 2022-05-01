@@ -63,10 +63,16 @@ def sendPdf(data,info,prn):
     ]
 
     # PDF Table - Strip '[]() and add word wrap to column 5
+    count_total = 0
     for index, row in enumerate(data):
         for col, val in enumerate(row):
             # print(val,type(val))
             val = str(val)
+            try:
+                if col==5:
+                    count_total += int(val)
+            except:
+                pass
             if col != 5 or index == 0:
                 data[index][col] = val
             else:
@@ -77,6 +83,9 @@ def sendPdf(data,info,prn):
     t.setStyle(table_style)
     elements.append(t)
 
+    line1 = 'Total Of All Subjects : '+str(count_total)
+
+    elements.append(Paragraph(line1, styleNormal))
     # Generate PDF
     archivo_pdf = SimpleDocTemplate(
         'Report Card.pdf',
@@ -90,6 +99,9 @@ def sendPdf(data,info,prn):
     import os
     return os.path.join('','Report Card.pdf')
 if __name__ == '__main__':
-    with open('smsInfo.csv', "r") as csvfile:
-        data = list(csv.reader(csvfile))
-    print(sendPdf(data))
+    # with open('test.csv', "r") as csvfile:
+    #     data = list(csv.reader(csvfile))
+    info = [('Salman Adhikari   ', 'IT', 'SIES Nerul', '4')]
+    data=[["Subject","Mcq Marks","Q2 Marks","Q3 Marks","Total Descriptive Marks","Total Marks"],[ 'OS',38, 39, 39, 78, 116], ['MPL',25, 35, 25, 60, 85 ], ['CN',25, 35, 25, 60, 85 ], ['MPL',25, 35, 25, 60, 85], ['CNND',25, 35, 25, 60, 85], ['GTA',25, 35, 25, 60, 85], ['OS',25, 35, 25, 60, 85],['OS',25, 35, 25, 60, 85]]
+    prn='421134031'
+    print(sendPdf(data,info,prn))
