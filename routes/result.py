@@ -10,9 +10,9 @@ def results():
         try:
             seat_nos = request.form["seat_no"]
             semester = request.form["semester"]
-            data = db.session.execute(f"""select "Mcq_marks","q2_marks","q3_marks","Tot_des_marks","Tot_marks", markshit.subject as ms from result INNER JOIN markshit ON result.markshit_id = markshit.id AND result.seat_no = '{seat_nos}' AND markshit.semester = '{semester}' AND markshit.isvalid = True""").fetchall()
+            data = db.session.execute(f"""select "Mcq_marks","q2_marks","q3_marks","Tot_des_marks","Tot_marks", marksheet.subject as ms from result INNER JOIN marksheet ON result.marksheet_id = marksheet.id AND result.seat_no = '{seat_nos}' AND marksheet.semester = '{semester}' AND marksheet.isvalid = True""").fetchall()
             
-            info_data = db.session.execute(f"select result.name,markshit.branch, markshit.collegename,markshit.semester from markshit INNER JOIN result ON markshit.id = result.markshit_id AND result.seat_no = '{seat_nos}' AND markshit.semester = '{semester}' AND markshit.isvalid = True ORDER BY markshit.id ASC LIMIT 1;").fetchall()
+            info_data = db.session.execute(f"select result.name,marksheet.branch, marksheet.collegename,marksheet.semester from marksheet INNER JOIN result ON marksheet.id = result.marksheet_id AND result.seat_no = '{seat_nos}' AND marksheet.semester = '{semester}' AND marksheet.isvalid = True ORDER BY marksheet.id ASC LIMIT 1;").fetchall()
             db.session.commit()
             print(info_data)
             print(data)

@@ -1,7 +1,7 @@
 from flask import Blueprint, redirect,render_template,request,flash, session
 from flask_login import login_required
 
-from models.Markshit import markshit
+from models.Marksheet import marksheet
 view = Blueprint(name="view", import_name=__name__)
 from models import db
 from models.Result import Result
@@ -10,14 +10,14 @@ from models.Result import Result
 def views(id):
     if request.method =='GET':
         print("--->>  ")
-        markshit_data = markshit.query.filter_by(id=id).first()
-        results = Result.query.filter_by(markshit_id=int(id)).all()
+        marksheet_data = marksheet.query.filter_by(id=id).first()
+        results = Result.query.filter_by(marksheet_id=int(id)).all()
         db.session.commit()
         print(results)
-        return render_template("viewcontaint.html",datas=results,markshit_data=markshit_data,id=id)
+        return render_template("viewcontaint.html",datas=results,markshit_data=marksheet_data,id=id)
     elif request.method =='POST':
         count = int(request.form["count"])
-        results = Result.query.filter_by(markshit_id=int(id)).first()
+        results = Result.query.filter_by(marksheet_id=int(id)).first()
         db.session.commit()
         curr_id = results.id
         print(curr_id)

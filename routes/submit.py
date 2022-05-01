@@ -1,7 +1,7 @@
 from flask import Blueprint, redirect,render_template,request,flash, session
 from flask_login import login_required
 
-from models.Markshit import markshit
+from models.Marksheet import marksheet
 submit = Blueprint(name="submit", import_name=__name__)
 from models import db
 from models.Result import Result
@@ -31,15 +31,15 @@ def submits():
                 Tot_des_marks=q2_marks+q3_marks
                 Tot_marks=q2_marks+q3_marks+Mcq_marks
                 print(Prn,Name,Mcq_marks,q2_marks,q3_marks)
-                Results = Result(seat_no=Prn, name=Name, Mcq_marks=Mcq_marks,q2_marks=q2_marks,q3_marks=q3_marks,Tot_des_marks=Tot_des_marks,Tot_marks=Tot_marks,markshit_id=session['markshit_id'])
+                Results = Result(seat_no=Prn, name=Name, Mcq_marks=Mcq_marks,q2_marks=q2_marks,q3_marks=q3_marks,Tot_des_marks=Tot_des_marks,Tot_marks=Tot_marks,marksheet_id=session['marksheet_id'])
                 db.session.add(Results)
                 db.session.commit()
-            markshit_update = markshit.query.filter_by(id=session['markshit_id']).first()
-            markshit_update.semester = semester
-            markshit_update.branch = branchname
-            markshit_update.collegename=collegename
-            markshit_update.subject=subject_name
-            markshit_update.isvalid=True
+            marksheet_update = marksheet.query.filter_by(id=session['marksheet_id']).first()
+            marksheet_update.semester = semester
+            marksheet_update.branch = branchname
+            marksheet_update.collegename=collegename
+            marksheet_update.subject=subject_name
+            marksheet_update.isvalid=True
             db.session.commit()
 
 

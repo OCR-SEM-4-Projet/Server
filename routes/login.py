@@ -2,7 +2,7 @@ from flask import Blueprint, redirect,render_template,request,flash
 from flask_login import login_user
 from models import db
 from models.Admin import admin
-from models.Markshit import markshit
+from models.Marksheet import marksheet
 login = Blueprint(name="login", import_name=__name__)
 @login.route("", methods=['GET','POST'])
 def logins():

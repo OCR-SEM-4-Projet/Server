@@ -1,8 +1,8 @@
 from . import db
 from .Admin import admin
 
-class markshit(db.Model):
-    __tablename__ = "markshit"
+class marksheet(db.Model):
+    __tablename__ = "marksheet"
     id = db.Column(db.Integer, primary_key=True)
     image_url = db.Column(db.String)
     semester = db.Column(db.String)

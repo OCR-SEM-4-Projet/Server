@@ -5,7 +5,7 @@ from flask_login import current_user, login_required
 import os
 from public.OCRdataExtract import over_all
 from models import db
-from models.Markshit import markshit
+from models.Marksheet import marksheet
 uploadimg = Blueprint(name="uploadimg", import_name=__name__)
 @uploadimg.route("", methods=['GET','POST'])
 @login_required
@@ -19,12 +19,12 @@ def uploadimgs():
             hash_filename = sha512(file_name).hexdigest()+str(file_extension)
             file.save(os.path.join('static/OCR/images', hash_filename))
             current_admin = current_user.id
-            markshits = markshit(image_url=hash_filename,conformbyadmin=current_admin)
-            db.session.add(markshits)
+            marksheets = marksheet(image_url=hash_filename,conformbyadmin=current_admin)
+            db.session.add(marksheets)
             db.session.commit()
-            markshit_id = markshits.id
-            session['markshit_id'] = markshit_id
-            print(markshit_id,session['markshit_id'])
+            marksheet_id = marksheets.id
+            session['marksheet_id'] = marksheet_id
+            print(marksheet_id,session['marksheet_id'])
             import json
             with open('public/actual_res.json', encoding='utf-8') as f:
                 data = json.load(f)
@@ -35,7 +35,7 @@ def uploadimgs():
             print(e)
             return redirect('/uploadimg')
     else:
-        markshit_list = markshit.query.filter(markshit.isvalid==True).limit(5).all()
+        marksheet_list = marksheet.query.filter(marksheet.isvalid==True).limit(5).all()
         db.session.commit()
-        print(markshit_list)
-        return render_template('dashboard.html',markshit_list=markshit_list)
+        print(marksheet_list)
+        return render_template('dashboard.html',markshit_list=marksheet_list)

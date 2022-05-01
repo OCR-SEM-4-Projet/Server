@@ -1,6 +1,6 @@
 from flask import Blueprint, redirect,render_template,request,flash,send_file
 from models import db
-from models.Markshit import markshit
+from models.Marksheet import marksheet
 from public.ResultPdf import sendPdf
 search = Blueprint(name="search", import_name=__name__)
 @search.route('',methods=['GET','POST'])
@@ -12,12 +12,12 @@ def searchs():
         subject = request.form["subject"]
         print(collegename,branch,semester,subject)
         try:
-            markshit_search = markshit.query.filter(markshit.collegename==collegename,markshit.branch==branch,markshit.semester==semester,markshit.subject==subject,markshit.isvalid==True).all()
+            marksheet_search = marksheet.query.filter(marksheet.collegename==collegename,marksheet.branch==branch,marksheet.semester==semester,marksheet.subject==subject,marksheet.isvalid==True).all()
             
             db.session.commit()
-            print('--->>>>',markshit_search)
-            if markshit_search:
-                return render_template('dashboard.html',markshit_list=markshit_search)
+            print('--->>>>',marksheet_search)
+            if marksheet_search:
+                return render_template('dashboard.html',markshit_list=marksheet_search)
             else:
                 flash("No data found")
                 return redirect('/uploadimg')

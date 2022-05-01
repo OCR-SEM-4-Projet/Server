@@ -37,6 +37,10 @@
 </head>
 
 <body>
+  {% with messages=get_flashed_messages() %} {% if messages %} {% for message in
+  messages %}
+  <script>alert("{{message}}")</script>
+  {% endfor %} {% endif %} {% endwith %}
 
   <section class="header-section">
 
@@ -64,8 +68,6 @@
   </nav>
   <section class="about" id="about">
 
-    <img src="{{ url_for('static',filename='assets/img/admin.png')}}" alt="admin" style="width:450px;height:450px;"
-      align="right">
     <div class="admin-welcome">
 
       <h2 class="welcome-text">
@@ -76,23 +78,30 @@
     </div>
 
     <br><br>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+          <h1 class="txt-msg">
+            <font face="Calibri">Please upload the marksheet</font>
+          </h1>
+          <form class="upload-btn" action="/uploadimg" method="post" enctype="multipart/form-data">
+            <div class="img-div" style="display: none;" id="img-div">
 
-    {% with messages=get_flashed_messages() %} {% if messages %} {% for message in
-    messages %}
-    <script>alert("{{message}}")</script>
-    {% endfor %} {% endif %} {% endwith %}
-    <h1 class="txt-msg">
-      <font face="Calibri">Please upload the marksheet</font>
-    </h1>
-    <form class="upload-btn" action="/uploadimg" method="post" enctype="multipart/form-data">
-      <div class="img-div" style="display: none;" id="img-div">
+              <img id="blah" src="#" class="marksheet-img" alt="">
+              <button type="submit" class="upload-img-btn">Upload to OCR</button>
+            </div>
+            <input class="file-upload-button" type='file' name="file" accept="image/png, image/jpeg"
+              onchange="readURL(this);" />
+          </form>
+        </div>
+        <div class="col-sm">
+          <img src="{{ url_for('static',filename='assets/img/admin.png')}}" alt="admin"
+            style="width:450px;height:450px;" align="right">
 
-        <img id="blah" src="#" class="marksheet-img" alt="">
-        <button type="submit" class="upload-img-btn">Upload to OCR</button>
+        </div>
       </div>
-      <input class="file-upload-button" type='file' name="file" accept="image/png, image/jpeg"
-        onchange="readURL(this);" />
-    </form>
+    </div>
+
 
     <script>
       function readURL(input) {
